@@ -1,8 +1,16 @@
+/// <reference = cypress>
+
 describe('Criando cenários de testes para o site da Product Store', () => {
   it('Deve filtrar por laptops e selecionar o primeiro laptop', () => {
     cy.visit('https://www.demoblaze.com/index.html');
     cy.contains('Laptops', {timeout: 20000}).click();
     cy.get('.card-title').first().should('contain.text', 'Sony vaio i5');
+  });
+
+  it('Deve filtrar por monitor e selecionar o primeiro monitor', () => {
+    cy.visit('https://www.demoblaze.com/index.html');
+    cy.contains('Monitor', {timeout: 20000}).click();
+    cy.get('.card-title').first().should('contain.text', '');
   });
 
   it('Deve abrir a página de um produto', () => {
@@ -18,6 +26,14 @@ describe('Criando cenários de testes para o site da Product Store', () => {
     cy.contains('Add to cart').click();
   });
 
+  it('Deve ser capaz de realizar login', () => {
+    cy.visit('https://www.demoblaze.com/index.html');
+    cy.get('#login2').click();
+    cy.get('#loginusername').type('anajuliap');
+    cy.get('#loginpassword').type('12345aj');
+    cy.get('.btn.btn-primary').contains('Log in').click();
+  });
+
   it('Deve falhar ao realizar login se as credenciais forem inválidas', () => {
     cy.visit('https://www.demoblaze.com/index.html');
     cy.get('#login2').click();
@@ -29,3 +45,4 @@ describe('Criando cenários de testes para o site da Product Store', () => {
     })
   });
 });
+
